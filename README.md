@@ -1,12 +1,79 @@
-# React + Vite
+# Round-Robin Coupon Distribution with Abuse Prevention
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project implements a **round-robin coupon distribution system** with abuse prevention mechanisms using **React.js** for the frontend and **Node.js (Express)** for the backend. No database is used; all data is stored in memory on the server.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+-  **Round-robin coupon assignment**: Coupons are distributed sequentially.
+-  **Guest access**: Users can claim coupons without logging in.
+-  **Abuse prevention**:
+   -  **IP tracking**: Prevents multiple claims from the same IP within 1 hour.
+   -  **Cookie tracking**: Blocks multiple claims from the same browser session.
+-  **User feedback**: Displays success or restriction messages.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+-  **Frontend**: React.js (Vite), Axios, Tailwind CSS
+-  **Backend**: Node.js, Express, CORS, Cookie-Parser
+
+---
+
+## Installation & Setup
+
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/SauravChaudhary26/sales-studio-assignment.git
+cd sales-studio
+```
+
+### 2. Setup the Backend
+
+```sh
+cd coupon-backend
+npm install
+node server.js
+```
+
+The backend runs on `http://localhost:5000`.
+
+### 3. Setup the Frontend
+
+```sh
+cd ../coupon-distributor
+npm install
+npm run dev
+```
+
+The frontend runs on `http://localhost:5173`.
+
+---
+
+## API Endpoints
+
+### `POST /claim`
+
+-  **Description**: Assigns a coupon to the user if they haven't claimed one recently.
+-  **Response**:
+   -  `200 OK`: `{ coupon: 'COUPON1', message: 'Coupon claimed successfully!' }`
+   -  `403 Forbidden`: `{ message: 'You can claim another coupon after 1 hour.' }`
+
+---
+
+## Abuse Prevention Strategies
+
+1. **IP Tracking**: Users' IP addresses are logged to restrict multiple claims within an hour.
+2. **Cookie-Based Tracking**: A cookie prevents repeated claims from the same browser.
+3. **CORS Protection**: Only requests from allowed origins are accepted.
+
+---
+
+## Future Enhancements
+
+-  Add CAPTCHA verification.
+-  Implement server-side rate limiting.
+-  Integrate a database for persistent storage.
+
+---
