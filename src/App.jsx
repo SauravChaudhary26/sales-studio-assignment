@@ -9,7 +9,7 @@ function App() {
    const claimCoupon = async () => {
       try {
          const response = await axios.post(
-            "http://localhost:5000/claim",
+            "https://sales-studio-assignment.onrender.com/claim",
             {},
             { withCredentials: true }
          );
