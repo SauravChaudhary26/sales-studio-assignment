@@ -1,0 +1,70 @@
+.container {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a202c; /* Dark background */
+    color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+ }
+ 
+ h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+ }
+ 
+ .claim-button {
+    padding: 0.5rem 1rem;
+    background-color: #4299e1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+ }
+ 
+ .claim-button:hover {
+    background-color: #3182ce;
+ }
+ 
+ .spinner-container {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+ }
+ 
+ .spinner {
+    width: 24px;
+    height: 24px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #4299e1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+ }
+ 
+ @keyframes spin {
+    0% {
+       transform: rotate(0deg);
+    }
+    100% {
+       transform: rotate(360deg);
+    }
+ }
+ 
+ .success-message {
+    margin-top: 1rem;
+    color: #48bb78;
+    font-size: 1.1rem;
+ }
+ 
+ .error-message {
+    margin-top: 1rem;
+    color: #f56565;
+    font-size: 1.1rem;
+ }
+ 

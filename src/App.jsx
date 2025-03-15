@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import "./App.css";
 
 function App() {
    const [coupon, setCoupon] = useState(null);
    const [message, setMessage] = useState(null);
+   const [isClaiming, setIsClaiming] = useState(false);
 
    const claimCoupon = async () => {
+      setIsClaiming(true);
+      setCoupon(null);
+      setMessage(null);
       try {
          const response = await axios.post(
             "https://sales-studio-assignment.onrender.com/claim",
@@ -16,24 +21,25 @@ function App() {
          setMessage(response.data.message);
       } catch (error) {
          setMessage(error.response?.data?.message || "An error occurred.");
+      } finally {
+         setIsClaiming(false);
       }
    };
 
    return (
-      <div className="min-h-screen flex flex-col items-center justify-center  bg-gray-900 text-white outer">
-         <h1 className="text-2xl font-bold mb-4">
-            Round-Robin Coupon Distribution
-         </h1>
-         <button
-            onClick={claimCoupon}
-            className="px-4 py-2 bg-blue-500 rounded-lg"
-         >
+      <div className="container">
+         <h1>Round-Robin Coupon Distribution</h1>
+         <button onClick={claimCoupon} className="claim-button">
             Claim Coupon
          </button>
-         {coupon && (
-            <p className="mt-4 text-green-400">Your Coupon: {coupon}</p>
+         {isClaiming && (
+            <div className="spinner-container">
+               <div className="spinner"></div>
+               <span>Claiming coupon...</span>
+            </div>
          )}
-         {message && <p className="mt-2 text-red-400">{message}</p>}
+         {coupon && <p className="success-message">Your Coupon: {coupon}</p>}
+         {message && !isClaiming && <p className="error-message">{message}</p>}
       </div>
    );
 }
