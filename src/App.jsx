@@ -10,8 +10,7 @@ function App() {
       try {
          const response = await axios.post(
             "https://sales-studio-assignment.onrender.com/claim",
-            {},
-            { withCredentials: true }
+            {}
          );
          setCoupon(response.data.coupon);
          setMessage(response.data.message);
