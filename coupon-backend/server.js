@@ -7,8 +7,10 @@ dotenv.config();
 const app = express();
 app.use(
    cors({
-      origin: "https://sales-studio-assignment.netlify.app/",
-      credentials: true,
+      origin: "*",
+      methods: ["GET", "POST"],
+      allowedHeaders: ["Content-Type"],
+      credentials: true, // Enable cookies across origins
    })
 );
 app.use(express.json());
